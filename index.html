@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Glass Calculator</title>
+    <style>
+        img {
+            border-radius: 15px;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 p-4">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-4">Glass Calculator</h1>
+
+        <img src="primegroup.jpg">
+
+        <label for="ngjyrat" class="text-lg font-bold mb-2">Zgjedh ngjyren:</label>
+
+        <select name="ngjyrat" id="ngjyrat" class="w-full py-2 px-4 border rounded-md">
+            <option value="Transparent">Transparent</option>
+            <option value="Xham i zi">Xham i zi</option>
+        </select>
+
+        <h3 class="text-lg mb-2 font-bold">Dimensionet</h3>
+
+        <div class="flex mb-4">
+            <input type="number" id="gjeresia" class="w-1/2 px-2 py-1 border rounded-l-md" placeholder="Width">
+            <h4 class="py-2 px-1">X</h4>
+            <input type="number" id="lartesia" class="w-1/2 px-2 py-1 border rounded-r-md" placeholder="Height">
+            <h4 class="py-2 px-1">=</h4>
+        </div>
+
+        <label for="numPieces" class="text-lg font-bold mb-2">Numri i pjeseve:</label>
+        <input type="number" id="numPieces" class="w-full px-2 py-1 border rounded-md" placeholder="Number of Pieces">
+        <br>
+        <br>
+
+
+
+        <button onclick="calculateArea()"
+            class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 ease-in-out">Calculate</button>
+
+        <p id="result" class="mt-4"></p>
+    </div>
+    <script>
+        function calculateArea() {
+            var height = parseFloat(document.getElementById("gjeresia").value);
+            var width = parseFloat(document.getElementById("lartesia").value);
+            var selectedOption = document.getElementById("ngjyrat").value;
+            var numPieces = parseInt(document.getElementById("numPieces").value);
+
+            var area = 0;
+
+            // Calculate the area based on the selected option value
+            switch (selectedOption) {
+                case "Transparent":
+                    area = height * width * 30;
+                    break;
+                case "Xham i zi":
+                    area = height * width * 33; // Adjust the calculation for Xham i zi
+                    break;
+                default:
+                    area = 0;
+            }
+
+            if (!isNaN(area) && !isNaN(numPieces)) {
+                var totalCost = area * numPieces;
+                document.getElementById("result").innerHTML =
+                    "<b>Totali:</b> " + totalCost.toFixed(2) + " €";
+            } else {
+                document.getElementById("result").innerHTML =
+                    "Please enter valid dimensions and number of pieces.";
+            }
+        }
+    </script>
+</body>
+
+</html>
